@@ -36,7 +36,7 @@ import lu.fisch.canze.interfaces.FieldListener;
  */
 public class HeatmapBatcompActivity extends CanzeActivity implements FieldListener, DebugListener {
 
-    public static final String SID_Preamble_CompartmentTemperatures = "7bb.6104."; // (LBC)
+    public static String SID_Preamble_CompartmentTemperatures = "7bb.6104."; // (LBC)
 
     private double mean = 0;
     private double lastVal [] = {0,15,15,15,15,15,15,15,15,15,15,15,15};
@@ -45,17 +45,27 @@ public class HeatmapBatcompActivity extends CanzeActivity implements FieldListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(MainActivity.isZOE() ? R.layout.activity_heatmap_batcomp : R.layout.activity_heatmap_batcomp2);
+        setContentView((MainActivity.isZOE() || MainActivity.isTwizy()) ? R.layout.activity_heatmap_batcomp : R.layout.activity_heatmap_batcomp2);
     }
 
     protected void initListeners() {
         MainActivity.getInstance().setDebugListener(this);
         if(MainActivity.isZOE()) {
             lastCell = 12;
+
+            for (int i = 1; i <= lastCell; i++) {
+                String sid = SID_Preamble_CompartmentTemperatures + (8 + i * 24); // remember, first is pos 32, i starts s at 1
+                addField(sid, 5000);
+            }
         }
-        for (int i = 1; i <= lastCell; i++) {
-            String sid = SID_Preamble_CompartmentTemperatures + (8 + i * 24); // remember, first is pos 32, i starts s at 1
-            addField(sid, 5000);
+        if(MainActivity.isTwizy()) {
+            SID_Preamble_CompartmentTemperatures = "554.";
+            lastCell = 7;
+
+            for (int i = 0; i < lastCell; i++) {
+                String sid = SID_Preamble_CompartmentTemperatures + (0 + i * 8); // remember, first is pos 32, i starts s at 1
+                addField(sid, 5000);
+            }
         }
     }
 
@@ -68,7 +78,14 @@ public class HeatmapBatcompActivity extends CanzeActivity implements FieldListen
         // get the text field
 
         if (fieldId.startsWith(SID_Preamble_CompartmentTemperatures)) {
-            int cell = (Integer.parseInt(fieldId.split("[.]")[2]) - 8) / 24; // cell is 1-based
+            int cell = 0;
+            if(MainActivity.isZOE()) {
+                cell = (Integer.parseInt(fieldId.split("[.]")[2]) - 8) / 24; // cell is 1-based
+            }
+
+            if(MainActivity.isTwizy()) {
+                cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 8 + 1; // cell is 1-based
+            }
             final double value = field.getValue();
             lastVal[cell] = value;
             // calculate the mean value of the previous full round
