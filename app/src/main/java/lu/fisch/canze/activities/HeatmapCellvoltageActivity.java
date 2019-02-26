@@ -48,7 +48,13 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_heatmap_cellvoltage);
+
+        if(MainActivity.isTwizy()){
+            setContentView(R.layout.activity_heatmap_cellvoltage_twizy);
+        } else {
+            setContentView(R.layout.activity_heatmap_cellvoltage);
+        }
+
     }
 
     protected void initListeners() {

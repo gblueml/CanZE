@@ -37,6 +37,7 @@ import lu.fisch.canze.interfaces.FieldListener;
 public class HeatmapBatcompActivity extends CanzeActivity implements FieldListener, DebugListener {
 
     public static final String SID_Preamble_CompartmentTemperatures = "7bb.6104."; // (LBC)
+    public static final String SID_Preamble_CompartmentTemperaturesT = "554.";     // (TBMS)
 
     private double mean = 0;
     private double lastVal [] = {0,15,15,15,15,15,15,15,15,15,15,15,15};
@@ -45,17 +46,30 @@ public class HeatmapBatcompActivity extends CanzeActivity implements FieldListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(MainActivity.isZOE() ? R.layout.activity_heatmap_batcomp : R.layout.activity_heatmap_batcomp2);
+        if(MainActivity.isZOE()){
+            setContentView(R.layout.activity_heatmap_batcomp);
+        } else if (MainActivity.isTwizy()){
+            setContentView(R.layout.activity_heatmap_batcomp_twizy);
+        } else {
+            setContentView(R.layout.activity_heatmap_batcomp2);
+        }
     }
 
     protected void initListeners() {
         MainActivity.getInstance().setDebugListener(this);
         if(MainActivity.isZOE()) {
             lastCell = 12;
+            for (int i = 1; i <= lastCell; i++) {
+                String sid = SID_Preamble_CompartmentTemperatures + (8 + i * 24); // remember, first is pos 32, i starts s at 1
+                addField(sid, 5000);
+            }
         }
-        for (int i = 1; i <= lastCell; i++) {
-            String sid = SID_Preamble_CompartmentTemperatures + (8 + i * 24); // remember, first is pos 32, i starts s at 1
-            addField(sid, 5000);
+        if(MainActivity.isTwizy()) {
+            lastCell = 7;
+            for (int i = 0; i < lastCell; i++) {
+                String sid = SID_Preamble_CompartmentTemperaturesT + (0 + i * 8); // remember, first is pos 32, i starts s at 1
+                addField(sid, 5000);
+            }
         }
     }
 
@@ -66,9 +80,15 @@ public class HeatmapBatcompActivity extends CanzeActivity implements FieldListen
         final String fieldId = field.getSID();
 
         // get the text field
-
+        int cell = 0;
         if (fieldId.startsWith(SID_Preamble_CompartmentTemperatures)) {
-            int cell = (Integer.parseInt(fieldId.split("[.]")[2]) - 8) / 24; // cell is 1-based
+            cell = (Integer.parseInt(fieldId.split("[.]")[2]) - 8) / 24; // cell is 1-based
+        }
+        if (fieldId.startsWith(SID_Preamble_CompartmentTemperaturesT)) {
+            cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 8 + 1; // cell is 1-based
+        }
+
+        if(cell > 0) {
             final double value = field.getValue();
             lastVal[cell] = value;
             // calculate the mean value of the previous full round
