@@ -330,7 +330,11 @@ public class MainActivity extends AppCompatActivity implements FieldListener /*,
 
             // since the car type may have changed, reload the frame timings and fields
             Frames.getInstance().load();
-            fields.load();
+            if(isTwizy()){
+                fields.load("Twizy_Fields.csv");
+            } else {
+                fields.load();
+            }
 
             if (device != null) {
                 // initialise the connection
