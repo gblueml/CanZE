@@ -67,7 +67,7 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
         if(MainActivity.isTwizy()) {
             lastCell = 14;
             for (int i = 1; i <= 5; i++) {
-                String sid = SID_Preamble_CellVoltagesT1 + (i * 12); // remember, first is pos 0, i starts s at 1
+                String sid = SID_Preamble_CellVoltagesT1 + ((i - 1) * 12); // remember, first is pos 0, i starts s at 1
                 addField(sid);
             }
             for (int i = 6; i <= 10; i++) {
@@ -98,20 +98,21 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
         // get the text field
         final String fieldId = field.getSID();
         int cell = 0;
-        if (fieldId.startsWith(SID_Preamble_CellVoltages1)) {
-            cell = (Integer.parseInt(fieldId.split("[.]")[2])) / 16; // cell is 1-based
-        } else if (fieldId.startsWith(SID_Preamble_CellVoltages2)) {
-            cell = (Integer.parseInt(fieldId.split("[.]")[2])) / 16 + 62; // cell is 1-based
-        } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT1)) {
-            cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 1; // cell is 1-based
-        } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT2)) {
-            cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 6; // cell is 1-based
-        } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT3)) {
-            cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 11; // cell is 1-based
+        if(MainActivity.isTwizy()){
+            if (fieldId.startsWith(SID_Preamble_CellVoltagesT1)) {
+                cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 1; // cell is 1-based
+            } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT2)) {
+                cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 6; // cell is 1-based
+            } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT3)) {
+                cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 11; // cell is 1-based
+            }
+        } else {
+            if (fieldId.startsWith(SID_Preamble_CellVoltages1)) {
+                cell = (Integer.parseInt(fieldId.split("[.]")[2])) / 16; // cell is 1-based
+            } else if (fieldId.startsWith(SID_Preamble_CellVoltages2)) {
+                cell = (Integer.parseInt(fieldId.split("[.]")[2])) / 16 + 62; // cell is 1-based
+            }
         }
-
-
-
 
         if (cell > 0 && cell <= lastCell) {
             final double value = field.getValue();
@@ -120,7 +121,7 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
             if (cell == lastCell) {
                 mean = 0;
                 double lowest = 5;
-                double highest = 3;
+                double highest = 0;
                 // lastVoltage[20] = 3.5; fake for test
                 for (int i = 1; i <= lastCell; i++) {
                     mean += lastVoltage[i];
@@ -130,7 +131,7 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
                 mean /= lastCell;
                 cutoff = lowest < 3.712 ? mean - (highest - mean) * 1.5 : 2;
 
-                        // the update has to be done in a separate thread
+                // the update has to be done in a separate thread
                 // otherwise the UI will not be repainted
                 runOnUiThread(new Runnable() {
                     @Override

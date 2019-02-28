@@ -63,7 +63,7 @@
                 >
                 <TextView
                     android:textSize="12sp"
-                    android:text="4"
+                    android:text="@string/_4"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center"
@@ -103,7 +103,7 @@
                 >
                 <TextView
                     android:textSize="12sp"
-                    android:text="7"
+                    android:text="@string/_7"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center"
@@ -143,7 +143,7 @@
                 >
                 <TextView
                     android:textSize="12sp"
-                    android:text="10"
+                    android:text="@string/_10"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center"
@@ -183,7 +183,7 @@
                 >
                 <TextView
                     android:textSize="12sp"
-                    android:text="13"
+                    android:text="@string/_13"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center"
