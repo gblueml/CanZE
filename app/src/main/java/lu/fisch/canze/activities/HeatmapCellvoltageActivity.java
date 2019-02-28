@@ -39,6 +39,10 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
     public static final String SID_Preamble_CellVoltages1 = "7bb.6141."; // (LBC)
     public static final String SID_Preamble_CellVoltages2 = "7bb.6142."; // (LBC)
 
+    public static final String SID_Preamble_CellVoltagesT1 = "556.";
+    public static final String SID_Preamble_CellVoltagesT2 = "557.";
+    public static final String SID_Preamble_CellVoltagesT3 = "55E.";
+
     private double mean = 0;
     private double cutoff;
     private double lastVoltage[] = {0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4};
@@ -60,13 +64,30 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
     protected void initListeners() {
         MainActivity.getInstance().setDebugListener(this);
         // Battery compartment temperatures
-        for (int i = 1; i <= 62; i++) {
-            String sid = SID_Preamble_CellVoltages1 + (i * 16); // remember, first is pos 16, i starts s at 1
-            addField(sid);
-        }
-        for (int i = 63; i <= 96; i++) {
-            String sid = SID_Preamble_CellVoltages2 + ((i - 62) * 16); // remember, first is pos 16, i starts s at 1
-            addField(sid);
+        if(MainActivity.isTwizy()) {
+            lastCell = 14;
+            for (int i = 1; i <= 5; i++) {
+                String sid = SID_Preamble_CellVoltagesT1 + (i * 12); // remember, first is pos 0, i starts s at 1
+                addField(sid);
+            }
+            for (int i = 6; i <= 10; i++) {
+                String sid = SID_Preamble_CellVoltagesT2 + ((i - 6) * 12); // remember, first is pos 0, i starts s at 1
+                addField(sid);
+            }
+            for (int i = 11; i <= 14; i++) {
+                String sid = SID_Preamble_CellVoltagesT3 + ((i - 11) *12); // remember, first is pos 0, i starts s at 1
+                addField(sid);
+            }
+        } else{
+            lastCell = 96;
+            for (int i = 1; i <= 62; i++) {
+                String sid = SID_Preamble_CellVoltages1 + (i * 12); // remember, first is pos 16, i starts s at 1
+                addField(sid);
+            }
+            for (int i = 63; i <= 96; i++) {
+                String sid = SID_Preamble_CellVoltages2 + ((i - 62) * 12); // remember, first is pos 16, i starts s at 1
+                addField(sid);
+            }
         }
     }
 
@@ -81,7 +102,17 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
             cell = (Integer.parseInt(fieldId.split("[.]")[2])) / 16; // cell is 1-based
         } else if (fieldId.startsWith(SID_Preamble_CellVoltages2)) {
             cell = (Integer.parseInt(fieldId.split("[.]")[2])) / 16 + 62; // cell is 1-based
+        } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT1)) {
+            cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 1; // cell is 1-based
+        } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT2)) {
+            cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 6; // cell is 1-based
+        } else if (fieldId.startsWith(SID_Preamble_CellVoltagesT3)) {
+            cell = (Integer.parseInt(fieldId.split("[.]")[1])) / 12 + 11; // cell is 1-based
         }
+
+
+
+
         if (cell > 0 && cell <= lastCell) {
             final double value = field.getValue();
 
