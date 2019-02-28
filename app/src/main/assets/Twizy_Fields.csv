@@ -1,28 +1,28 @@
 # SID (defaults to ID.startBit.[responseId]), ID (hex), startBit, endBit, resolution, offset (aplied BEFORE resolution multiplication), decimals, unit, requestID (hex string), responseID (hex string), options (hex: see MainActivity for definitions), optional name, optional list
-,130,44,55,-3,4094,0,Nm,,,ff,DriverBrakeWheelTq_Req
-,186,16,27,0.5,800,1,Nm,,,ff,MeanEffectiveTorque
-,186,40,49,0.125,0,1,%,,,ff,Throttle
-,18a,27,38,0.5,800,1,Nm,,,ff,Coasting Torque
-,1f8,16,27,1,4096,0,Nm,,,ff,TotalPotentialResistiveWheelsTorque
-,1f8,28,39,-1,4096,0,Nm,,,ff,ElecBrakeWheelsTorqueApplied
-,1f8,40,50,10,0,0,Rpm,,,ff,ElecEngineRPM
-,1fd,0,7,0.390625,0,1,%,,,ff,12V Battery Current?
-,1fd,48,55,1,80,0,kW,,,ff,Consumption
-,35c,5,7,1,0,0,,,,ff,Vehicle state
+,130,44,55,-3,4094,0,Nm,,,f7,DriverBrakeWheelTq_Req
+,186,16,27,0.5,800,1,Nm,,,f7,MeanEffectiveTorque
+,186,40,49,0.125,0,1,%,,,f7,Throttle
+,18a,27,38,0.5,800,1,Nm,,,f7,Coasting Torque
+,1f8,16,27,1,4096,0,Nm,,,f7,TotalPotentialResistiveWheelsTorque
+,1f8,28,39,-1,4096,0,Nm,,,f7,ElecBrakeWheelsTorqueApplied
+,1f8,40,50,10,0,0,Rpm,,,f7,ElecEngineRPM
+,1fd,0,7,0.390625,0,1,%,,,f7,12V Battery Current?
+,1fd,48,55,1,80,0,kW,,,f7,Consumption
+,35c,5,7,1,0,0,,,,f7,Vehicle state
 ,427,40,47,0.3,0,0,kW,,,e2,Available Charging Power
 ,427,49,57,0.1,0,1,kWh,,,e2,Available Energy
-,42a,30,39,0.1,400,1,°C,,,ff,Evaporator Temp Measure
+,42a,30,39,0.1,400,1,°C,,,f7,Evaporator Temp Measure
 ,42a,48,50,1,0,0,,,,e2,ClimLoopMode
 ,42e,0,12,0.02,0,2,%,,,e3,State of Charge
 ,42e,20,24,5,0,0,%,,,e2,Engine Fan Speed
 ,42e,38,43,1,0,1,A,,,e3,Charging Pilot Current
 ,42e,44,50,1,40,0,°C,,,e3,HV Battery Temp
-,42e,56,63,0.3,0,1,kW,,,ff,Charging Power
+,42e,56,63,0.3,0,1,kW,,,f7,Charging Power
 ,430,24,33,0.5,30,1,°C,,,e2,Comp Temperature Discharge
 ,430,38,39,1,0,0,,,,e2,HV Battery Cooling State
 ,430,40,49,0.1,400,1,°C,,,e2,HV Battery Evaporator Temp
 ,432,36,37,1,0,0,,,,e2,HV Bat Conditionning Mode
-,4f8,4,5,-1,-2,0,,,,ff,Parking Break
+,4f8,4,5,-1,-2,0,,,,f7,Parking Break
 ,534,32,40,1,40,0,°C,,,e5,Temp out
 ,554,0,7,1,40,0,°C,,,08,Cell 1 Temperature
 ,554,8,15,1,40,0,°C,,,08,Cell 2 Temperature
@@ -45,8 +45,8 @@
 ,55E,12,23,0.005,0,3,V,,,08,Cell 12 V
 ,55E,24,35,0.005,0,3,V,,,08,Cell 13 V
 ,55E,36,47,0.005,0,3,V,,,08,Cell 14 V
-,55E,48,63,10,0,0,km,,,08,Kilometerstand Akku
+,55E,48,63,10,0,0,km,,,08,Odometer Battery
 ,55F,40,51,0.1,0,1,V,,,08,Battery voltage 1
 ,55F,52,63,0.1,0,1,V,,,08,Battery Voltage 2
 ,5d7,0,15,0.01,0,2,km/h,,,ff,Speed
-,5d7,16,47,0.0000625,0,3,km,,,08,km Stand
+,5d7,16,47,0.000625,0,3,km,,,08,km Stand
