@@ -41,7 +41,7 @@ public class HeatmapCellvoltageActivity extends CanzeActivity implements FieldLi
 
     public static final String SID_Preamble_CellVoltagesT1 = "556.";
     public static final String SID_Preamble_CellVoltagesT2 = "557.";
-    public static final String SID_Preamble_CellVoltagesT3 = "55E.";
+    public static final String SID_Preamble_CellVoltagesT3 = "55e.";
 
     private double mean = 0;
     private double cutoff;
