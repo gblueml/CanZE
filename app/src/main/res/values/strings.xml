@@ -538,7 +538,11 @@
     <string name="title_activity_heatmap_cellvoltage">Voltage heatmap</string>
     <string name="button_HeatmapVoltage">Voltage heatmap</string>
     <string name="_1" translatable="false">1</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_7" translatable="false">7</string>
     <string name="_9" translatable="false">9</string>
+    <string name="_10" translatable="false">10</string>
+    <string name="_13" translatable="false">13</string>
     <string name="_17" translatable="false">17</string>
     <string name="_25" translatable="false">25</string>
     <string name="_33" translatable="false">33</string>
