@@ -1,4 +1,11 @@
 # SID (defaults to ID.startBit.[responseId]), ID (hex), startBit, endBit, resolution, offset (aplied BEFORE resolution multiplication), decimals, unit, requestID (hex string), responseID (hex string), options (hex: see MainActivity for definitions), optional name, optional list
+,155,0,7,300,0,0,W,,,08,Charge power W
+,155,8,11,1,0,0,,,,08,Charger Handshake
+,155,12,23,16,2000,0,W,,,08,Batter power W
+,155,24,31,1,0,0,,,,08,Battery state/phase
+,155,32,47,0.0025,0,0,%,,,08,Battery SoC
+,155,48,55,1,0,0,,,,08,Unknown
+,155,56,63,1,0,0,,,,08,Unknown
 ,130,44,55,-3,4094,0,Nm,,,f7,DriverBrakeWheelTq_Req
 ,186,16,27,0.5,800,1,Nm,,,f7,MeanEffectiveTorque
 ,186,40,49,0.125,0,1,%,,,f7,Throttle
