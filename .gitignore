@@ -13,3 +13,5 @@ gradle.xml
 *.apk
 *.iml
 
+
+\.idea/
