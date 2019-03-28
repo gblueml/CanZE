@@ -40,7 +40,11 @@ public class BatteryActivity extends CanzeActivity implements DebugListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battery);
+        if(MainActivity.isTwizy()){
+            setContentView(R.layout.activity_battery_twizy);
+        } else {
+            setContentView(R.layout.activity_battery);
+        }
 
         TextView textView = findViewById(R.id.link);
         textView.setText(Html.fromHtml(MainActivity.getStringSingle(R.string.help_QA)));
