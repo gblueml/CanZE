@@ -6,6 +6,18 @@
 ,155,32,47,0.0025,0,0,%,,,08,Battery SoC
 ,155,48,55,1,0,0,,,,08,Unknown
 ,155,56,63,1,0,0,,,,08,Unknown
+,196,32,33,250,254,0,W,,,08,Motor Power
+,196,56,63,1,40,0,°C,,,08,Engine Temperature
+,19f,0,7,1,0,0,,,,08,Unknown
+,19f,8,15,1,0,0,,,,08,Unknown
+,19f,16,31,10,2000,0,rpm,,,08,Engine speed
+,19f,32,63,1,0,0,,,,08,Unknown
+,19f,48,55,1,0,0,,,,08,Unknown
+,19f,56,63,1,0,0,,,,08,Unknown
+,19f,48,55,1,0,0,,,,08,Unknown
+,423,0,7,1,0,0,,,,08,Charger on/off
+,423,8,15,1,0,0,,,,08,Charger Unknown
+,423,48,63,1,0,0,,,,08,Charger Unknown
 ,424,0,7,1,0,0,,,,08,Charger handshake
 ,424,8,15,1,0,0,,,,08,Unknown
 ,424,16,23,500,0,0,W,,,08,max Charge power
@@ -14,6 +26,12 @@
 ,424,40,47,1,0,0,%,,,08,SoH
 ,424,48,55,1,0,0,,,,08,Unknown
 ,424,56,63,1,40,0,W,,,08,max Temperature
+,425,0,7,1,0,0,,,,08,Charger handshake
+,425,8,15,1,0,0,,,,08,Unknown
+,425,32,47,1,0,0,V,,,08,Battery voltage 1?
+,425,48,63,1,0,0,V,,,08,Battery voltage 2?
+,426,32,47,1,0,3,km,,,08,km Stand Charger
+,436,0,31,1,0,3,min,,,08,display time
 ,554,0,7,1,40,0,°C,,,08,Cell 1 Temperature
 ,554,8,15,1,40,0,°C,,,08,Cell 2 Temperature
 ,554,16,23,1,40,0,°C,,,08,Cell 3 Temperature
@@ -38,5 +56,33 @@
 ,55e,48,63,10,0,0,km,,,08,Odometer Battery
 ,55f,40,51,0.1,0,1,V,,,08,Battery voltage 1
 ,55f,52,63,0.1,0,1,V,,,08,Battery Voltage 2
+,597,0,7,1,0,0,,,,08,AC Power status
+,597,8,15,1,0,0,,,,08,Status
+,597,16,23,0.2,0,1,A,,,08,Current DC/DC 12V
+,597,24,31,1,0,0,,,,08,Charging handshake
+,597,32,39,1,0,0,,,,08,Version (unconfirmed)
+,597,40,47,1,0,0,,,,08,Unknown
+,597,48,55,1,0,0,,,,08,Unknown
+,597,56,63,1,40,0,°C,,,08, Temperature DC/DC
+,599,0,31,1,0,0,km,,,08,Odometer
+,599,32,39,1,0,0,,,,08,Unknown
+,599,40,47,1,0,0,km,,,08,Available range
+,599,48,63,1,0,0,km/h,,,08,Vehicle speed absolute
+,59b,0,7,1,0,0,,,,08,Gear selector
+,59b,8,15,1,0,0,,,,08,Brake/Controller state
+,59b,16,23,1,100,1,,,,08,Engine Power/Torque
+,59b,24,31,1,0,0,,,,08,Accelerator value
+,59b,32,39,1,0,0,,,,08,Brake/Controller state
+,59b,40,47,0.5,0,0,V,,,08,DC link voltage
+,59b,48,55,1,0,0,,,,08,Unknown
+,59b,56,63,1,0,0,,,,08,Unknown
+,59e,0,15,0.1,0,0,m,,,08,cyclic distance counter
+,59e,40,47,1,40,0,°C,,,08,Controller temperature
 ,5d7,0,15,0.01,0,2,km/h,,,ff,Speed
 ,5d7,16,47,0.000625,0,3,km,,,08,km Stand
+,627,0,23,1,0,0,,,,08,Charger error code
+,628,0,23,1,0,0,,,,08,BMS error code
+,629,0,23,1,0,0,,,,08,Controller error code
+,659,0,31,1,0,0,,,,08,BMS status code
+,69f,0,31,1,0,0,,,,08,VIN
+,701,0,7,1,0,0,,,,08,Controller op mode state
